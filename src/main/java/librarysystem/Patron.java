@@ -3,21 +3,20 @@ package librarysystem;
  * Patrons for libary management system
  */
 public class Patron {
-    private static int idCounter = 1;
     private int id;
     private String name;
     private int age;
     
     /**
      * Constructor for a Patron
+     * @param id ID of the patron
      * @param name Full name of the patron
      * @param age Age of the patron in years
      */
-    public Patron(String name,int age){
+    public Patron(int id, String name,int age){
         this.name = name;
         this.age = age;
-        this.id = idCounter;
-        idCounter += 1;
+        this.id = id;
     }
 
     /**
@@ -58,14 +57,25 @@ public class Patron {
     * @param age The new age of the patron
     */
     public void setAge(int age) {
-        if (age != 0)
+        if (age > 0)
             this.age = age;
+    }
+    /**
+    * Sets the id of the Patron
+    * @param id The new id of the patron
+    */
+    public void setId(int id) {
+        if (id > 0)
+            this.id = id;
     }
 
     @Override
 	public int hashCode() {
-		return id;
-	}
+        final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+    }
 
 	@Override
 	public boolean equals(Object obj) {
@@ -76,7 +86,11 @@ public class Patron {
 		if (getClass() != obj.getClass())
 			return false;
 		final Patron other = (Patron) obj;
-		if (other.id != this.id)
+        if (other.id != this.id)
+			return false;
+        if (!other.name.equals(this.name))
+			return false;
+        if (other.age != this.age)
 			return false;
 		return true;
 	}

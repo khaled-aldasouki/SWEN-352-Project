@@ -9,7 +9,7 @@ public class Library {
     // Maps the ISBN to the Book
     private HashMap<String, Book> books;
 
-    // Maps the ISBN to the Book
+    // Maps the Patron ID to the Patrons
     private HashMap<Integer, Patron> patrons;
 
     // Maps the ISBN to the number of available copies of each book
@@ -99,8 +99,8 @@ public class Library {
      * @param name Name of the patron
      * @param age Age of the patron
      */
-    public void addPatron(String name,int age){
-        Patron newPatron = new Patron(name, age);
+    public void addPatron(int id,String name,int age){
+        Patron newPatron = new Patron(id,name, age);
         patrons.put(newPatron.getId(), newPatron);
     }
 

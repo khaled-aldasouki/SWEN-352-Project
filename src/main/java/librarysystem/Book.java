@@ -81,7 +81,10 @@ public class Book {
 
     @Override
 	public int hashCode() {
-		return ISBN.hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ISBN.hashCode();
+		return result;
 	}
 
 	@Override
@@ -93,7 +96,11 @@ public class Book {
 		if (getClass() != obj.getClass())
 			return false;
 		final Book other = (Book) obj;
-		if (other.ISBN != this.ISBN)
+		if (!other.ISBN.equals(this.ISBN))
+			return false;
+		if (!other.title.equals(this.title))
+			return false;
+		if (!other.author.equals(this.author))
 			return false;
 		return true;
 	}
