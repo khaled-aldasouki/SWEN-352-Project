@@ -8,6 +8,7 @@ public class Book {
     private String title;
     private String author;
     private String ISBN;
+	private int copies;
 
     /**
 	 * Constructor for a book
@@ -15,10 +16,11 @@ public class Book {
 	 * @param author Author of the book
 	 * @param ISBN ISBN of the book
 	 */
-	public Book(String title, String author, String ISBN){
+	public Book(String title, String author, String ISBN,int copies){
         this.title = title;
         this.author = author;
         this.ISBN = ISBN;
+		this.copies = copies;
     }
 
 
@@ -78,7 +80,23 @@ public class Book {
 			this.ISBN = ISBN;
 	}
 
+	/**
+    * Returns the number of copies of the book
+    * @return String
+    */
+    public int getCopies() {
+        return copies;
+    }
 
+	/**
+    * Sets the number of copies of the book
+    * @param ISBN The new ISBN of the Book
+    */
+	public void setCopies(int copies){
+		if (copies >= 0)
+			this.copies = copies;
+	}
+	
     @Override
 	public int hashCode() {
 		final int prime = 31;
@@ -110,6 +128,6 @@ public class Book {
 	* @return String
 	*/
 	public String toString() {
-		return "Title: " + title + "\nAuthor: " + author +"\nISBN: " + ISBN ;
+		return "Title: " + title + "\nAuthor: " + author +"\nISBN: " + ISBN + "\nCopies: " + copies ;
 	}
 }

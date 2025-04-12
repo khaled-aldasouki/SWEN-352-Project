@@ -12,8 +12,7 @@ public class Library {
     // Maps the Patron ID to the Patrons
     private HashMap<Integer, Patron> patrons;
 
-    // Maps the ISBN to the number of available copies of each book
-    private HashMap<String, Integer> availableCopies;
+ 
 
     // Maps the patron id to a book's ISBN which they currently have checked out (borrowed) 
     private HashMap<Integer, String> borrowedBooks;
@@ -22,7 +21,6 @@ public class Library {
     public Library(){
         this.books = new HashMap<String,Book>();
         this.patrons = new HashMap<Integer,Patron>();
-        this.availableCopies = new HashMap<String, Integer>();
         this.borrowedBooks = new HashMap<Integer, String>();
     }
 
@@ -45,14 +43,6 @@ public class Library {
 
 
     /**
-     * Returns the available copies of the books in the system
-     * @return HashMap<String, Integer>
-     */
-    public HashMap<String, Integer> getAvailableCopies() {
-        return availableCopies;
-    }
-
-    /**
      * Returns the patrons with a borrowed book and it's ISBN
      * @return HashMap<Integer, String>
      */
@@ -71,8 +61,8 @@ public class Library {
      */
     public void addBook(String title, String author, String ISBN, int copies) throws LibraryException{
         if (!books.containsKey(ISBN)){
-            books.put(ISBN, new Book(title,author,ISBN));
-            availableCopies.put(ISBN, copies);
+            books.put(ISBN, new Book(title,author,ISBN,copies));
+           
         }
         else{
             throw new LibraryException("Book already exists in the library system.");
@@ -87,7 +77,6 @@ public class Library {
     public void removeBook(String ISBN) throws LibraryException{
         if (books.containsKey(ISBN)){
             books.remove(ISBN);
-            availableCopies.remove(ISBN);
         }
         else{
             throw new LibraryException("Book does not exist in the library system.");
@@ -120,7 +109,7 @@ public class Library {
             throw new LibraryException("Book with ISBN " + ISBN + " does not exist in the sytem.");
         }
         //Check if the book still has enough copies
-        else if (availableCopies.get(ISBN) == 0){
+        else if (books.get(ISBN).getCopies() == 0){
             throw new LibraryException("Book with ISBN " + ISBN + " does not have available copies.");
         }
         // Make sure the patron does not have a book already borrowed
@@ -130,7 +119,7 @@ public class Library {
         else{
             // Check out the book and decrement available copies
             borrowedBooks.put(patronId, ISBN);
-            availableCopies.put(ISBN, availableCopies.get(ISBN) - 1 );
+            books.get(ISBN).setCopies(books.get(ISBN).getCopies() - 1) ;
         }
     }
 }

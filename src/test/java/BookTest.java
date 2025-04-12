@@ -15,7 +15,7 @@ public class BookTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		book = new Book("Title","Author","12345");
+		book = new Book("Title","Author","12345",1);
 	}
 
 	@AfterEach
@@ -42,6 +42,11 @@ public class BookTest {
 		assertEquals(expected, book.getISBN());
 	}
 
+    @Test
+	void testGetCopies() {
+		int expected = 1;
+		assertEquals(expected, book.getCopies());
+	}
     //Tests for setters
 
     //Tests for setTitle
@@ -91,6 +96,21 @@ public class BookTest {
 		assertEquals(expected, book.getISBN());
     }
 
+    //Tests for setCopies
+    @Test 
+    public void testSetCopies(){
+        int expected = 2;
+		book.setCopies(2);
+		assertEquals(expected, book.getCopies());
+    }
+
+    @Test 
+    public void testSetCopiesNegative(){
+        int expected = 1;
+		book.setCopies(-1);
+		assertEquals(expected, book.getCopies());
+    }
+
     //Tests for hashcode
     @Test
 	void testHashcode() {
@@ -118,28 +138,28 @@ public class BookTest {
 
     @Test
     void testEqualsTrue(){
-        assertTrue(book.equals(new Book("Title","Author","12345")));
+        assertTrue(book.equals(new Book("Title","Author","12345",1)));
     }
 
     @Test
     void testEqualsFalse1(){
-        assertFalse(book.equals(new Book("Title 2","Author","12345")));
+        assertFalse(book.equals(new Book("Title 2","Author","12345",1)));
     }
     
     @Test
     void testEqualsFalse2(){
-        assertFalse(book.equals(new Book("Title","Author 2","12345")));
+        assertFalse(book.equals(new Book("Title","Author 2","12345",1)));
     }
 
     @Test
     void testEqualsFalse3(){
-        assertFalse(book.equals(new Book("Title","Author","54321")));
+        assertFalse(book.equals(new Book("Title","Author","54321",1)));
     }
 
     //Tests for toString
     @Test
     void testToString(){
-        String expected = "Title: Title\nAuthor: Author\nISBN: 12345";
+        String expected = "Title: Title\nAuthor: Author\nISBN: 12345\nCopies: 1";
         assertEquals(expected, book.toString());
     }
 }
