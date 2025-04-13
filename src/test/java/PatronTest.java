@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.annotation.Testable;
 
+import librarysystem.Book;
 import librarysystem.Patron;
 
 @Testable
@@ -45,7 +46,19 @@ public class PatronTest {
 		assertEquals(expected, patron.getAge());
 	}
 
+    @Test
+	void testGetBorrowedBookNull() {
+		Book expected = null;
+		assertEquals(expected, patron.getBorrowedBook());
+	}
     
+    @Test
+	void testGetBorrowedBookNotNull() {
+        Book newbook = new Book("Title", "Author", "12345", 1);
+        patron.setBorrowedBook(newbook);
+		Book expected = newbook;
+		assertEquals(expected, patron.getBorrowedBook());
+	}
 
     //Tests for setters
 
@@ -155,8 +168,16 @@ public class PatronTest {
 
     //Tests for toString
     @Test
-    void testToString(){
+    void testToString1(){
         String expected = "ID: " + patron.getId() + "\nName: Patron\nAge: 20";
+        assertEquals(expected, patron.toString());
+    }
+
+    @Test
+    void testToString2(){
+        Book newbook = new Book("Title", "Author", "12345", 1);
+        patron.setBorrowedBook(newbook);
+        String expected = "ID: " + patron.getId() + "\nName: Patron\nAge: 20\nBorrowed Book: Title";
         assertEquals(expected, patron.toString());
     }
 }

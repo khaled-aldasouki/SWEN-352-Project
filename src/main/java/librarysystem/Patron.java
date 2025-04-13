@@ -6,7 +6,8 @@ public class Patron {
     private int id;
     private String name;
     private int age;
-    
+    private Book borrowedBook;
+
     /**
      * Constructor for a Patron
      * @param id ID of the patron
@@ -17,14 +18,25 @@ public class Patron {
         this.name = name;
         this.age = age;
         this.id = id;
+        this.borrowedBook = null;
     }
 
+    
     /**
     * Returns the ID of the Patron
     * @return int
     */
     public int getId() {
         return id;
+    }
+
+    /**
+    * Sets the id of the Patron
+    * @param id The new id of the patron
+    */
+    public void setId(int id) {
+        if (id > 0)
+            this.id = id;
     }
 
     /**
@@ -60,13 +72,21 @@ public class Patron {
         if (age > 0)
             this.age = age;
     }
+    
     /**
-    * Sets the id of the Patron
-    * @param id The new id of the patron
+    * Returns the borrowed book of the Patron
+    * @return Book
     */
-    public void setId(int id) {
-        if (id > 0)
-            this.id = id;
+    public Book getBorrowedBook() {
+        return borrowedBook;
+    }
+
+    /**
+    * Sets the borrowed Book of the patron
+    * @param borrowedBook The book being borrowed by the patron
+    */
+    public void setBorrowedBook(Book borrowedBook) {
+        this.borrowedBook = borrowedBook;
     }
 
     @Override
@@ -100,6 +120,10 @@ public class Patron {
 	* @return String
 	*/
 	public String toString() {
-		return "ID: " + id + "\nName: " + name + "\nAge: " + age;
+        String result = "ID: " + id + "\nName: " + name + "\nAge: " + age;
+        if (borrowedBook == null){
+            return result;
+        }
+		return result + "\nBorrowed Book: " + borrowedBook.getTitle();
 	}
 }
