@@ -262,22 +262,22 @@ public class LibraryTest {
     }
 
     @Test
-    public void testCheckOutBook5(){
+    public void testCheckOutBook5() {
+
         // Test when no copies are available
-        try{
-            Patron testPatron =new Patron(123, "name", 20);
-            Book testBook = new Book("Title", "Author", "123456", 0);
-            when(mockDb.getPatronById(123)).thenReturn(testPatron);
-            when(mockDb.getBookByISBN("12345")).thenReturn(testBook);
-            
+
+        Patron testPatron = new Patron(123, "name", 20);
+        Book testBook = new Book("Title", "Author", "123456", 0);
+        when(mockDb.getPatronById(123)).thenReturn(testPatron);
+        when(mockDb.getBookByISBN("12345")).thenReturn(testBook);
+        LibraryException exception = assertThrows(LibraryException.class, () -> {
             library.checkOutBook(123, "12345");
-            
-        }
-        catch (LibraryException e){
-            verify(mockDb).getPatronById(123);
-            verify(mockDb).getBookByISBN("12345");
-            assertEquals("The book currently doesn't have any available copies to borrow.",e.getMessage());
-        }
+        });
+        
+        verify(mockDb).getPatronById(123);
+        verify(mockDb).getBookByISBN("12345");
+        assertEquals("The book currently doesn't have any available copies to borrow.", exception.getMessage());
+        assertEquals(0, testBook.getCopies());
     }
     @Test
     public void testCheckOutBook6(){
@@ -292,7 +292,7 @@ public class LibraryTest {
             verify(mockDb).getPatronById(123);
             verify(mockDb).getBookByISBN("12345");
             assertEquals(testBook, testPatron.getBorrowedBook());
-            //assertEquals(0, testBook.getCopies());
+            assertEquals(0, testBook.getCopies());
         }
         catch (LibraryException e){
             assertNotSame("The patron ID or book ISBN is incorrect.",e.getMessage());
@@ -329,7 +329,7 @@ public class LibraryTest {
             library.returnBook(123);
             verify(mockDb).getPatronById(123);
             assertEquals(null, testPatron.getBorrowedBook());
-            //assertEquals(1, testBook.getCopies());
+            assertEquals(1, testBook.getCopies());
         }
         catch (LibraryException e){
             assertNotSame("The patron is not currently borrowing a book.",e.getMessage());
