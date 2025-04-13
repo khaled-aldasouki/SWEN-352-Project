@@ -225,7 +225,7 @@ public class LibraryTest {
 
     @Test
     public void checkOutBookTest3(){
-        // Test with book that doesn't exist
+        // Test with book and patron that don't exist
         try{
             when(mockDb.getPatronById(123)).thenReturn(null);
             when(mockDb.getBookByISBN("12345")).thenReturn(null);
