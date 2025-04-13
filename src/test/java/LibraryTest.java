@@ -33,7 +33,7 @@ public class LibraryTest {
     
     // Tests for addBook
     @Test
-    public void addBookTest1(){
+    public void testAddBook1(){
         // Test with no books previously added
         try{
             boolean result = library.addBook("Title", "Author", "12345", 0);
@@ -47,11 +47,11 @@ public class LibraryTest {
     }
     
     @Test
-    public void addBookTest2(){
+    public void testAddBook2(){
         // Test with the same book added already
         try{
             
-            // Setup a list with a book for the mocked method to return
+            // Setup a list with a book for the mocked method to return 
             Book testBook = new Book("Title", "Author", "12345", 0);
             List<Book> books = Collections.singletonList(testBook);
 
@@ -70,7 +70,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void addBookTest3(){
+    public void testAddBook3(){
         // Test with different books previously added
         try{
             // Setup a list with a book for the mocked method to return
@@ -92,7 +92,7 @@ public class LibraryTest {
 
     // Tests for removeBook
     @Test
-    public void removeBookTest1(){
+    public void testRemoveBook1(){
         // Test with book available to delete
         try{
             when(mockDb.deleteBookByISBN(anyString())).thenReturn(true);
@@ -107,7 +107,7 @@ public class LibraryTest {
         }
     }
     @Test
-    public void removeBookTest2(){
+    public void testRemoveBook2(){
         // Test with book available to delete
         try{
            when(mockDb.deleteBookByISBN(anyString())).thenReturn(false);
@@ -125,7 +125,7 @@ public class LibraryTest {
 
     // Tests for addPatron
     @Test
-    public void addPatronTest1(){
+    public void testAddPatron1(){
         try{
             when(mockDb.getPatronById(123)).thenReturn(null);
             boolean result = library.addPatron(123,"Name",20);
@@ -139,7 +139,7 @@ public class LibraryTest {
             
     }
     @Test
-    public void addPatronTest2(){
+    public void testAddPatron2(){
         try{
             Patron testPatron = new Patron(123, "name", 20);
             when(mockDb.getPatronById(123)).thenReturn(testPatron);
@@ -156,7 +156,7 @@ public class LibraryTest {
  
     //Tests for removePatron
     @Test
-    public void removePatronTest1(){
+    public void testRemovePatron1(){
         // Test with Patron available to delete
         try{
             when(mockDb.deletePatronById(123)).thenReturn(true);
@@ -171,7 +171,7 @@ public class LibraryTest {
         }
     }
     @Test
-    public void removePatronTest2(){
+    public void testRemovePatron2(){
         // Test with book available to delete
         try{
             when(mockDb.deletePatronById(123)).thenReturn(false);
@@ -188,7 +188,7 @@ public class LibraryTest {
 
     // Tests for Check out Book
     @Test
-    public void checkOutBookTest1(){
+    public void testCheckOutBook1(){
         // Test with patron that doesn't exist
         try{
             when(mockDb.getPatronById(123)).thenReturn(null);
@@ -205,7 +205,7 @@ public class LibraryTest {
         }
     }
     @Test
-    public void checkOutBookTest2(){
+    public void testCheckOutBook2(){
         // Test with book that doesn't exist
         try{
             Patron testPatron =new Patron(123, "name", 20);
@@ -222,7 +222,7 @@ public class LibraryTest {
         }
     }
     @Test
-    public void checkOutBookTest3(){
+    public void testCheckOutBook3(){
         // Test with book that doesn't exist
         try{
             when(mockDb.getPatronById(123)).thenReturn(null);
@@ -238,7 +238,7 @@ public class LibraryTest {
         }
     }
     @Test
-    public void checkOutBookTest4(){
+    public void testCheckOutBook4(){
         // Test while patron still has a book borrowed
         try{
             Patron testPatron =new Patron(123, "name", 20);
@@ -258,7 +258,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void checkOutBookTest5(){
+    public void testCheckOutBook5(){
         // Test when no copies are available
         try{
             Patron testPatron =new Patron(123, "name", 20);
@@ -276,7 +276,7 @@ public class LibraryTest {
         }
     }
     @Test
-    public void checkOutBookTest6(){
+    public void testCheckOutBook6(){
         // Test when all conditions are met
         try{
             Patron testPatron =new Patron(123, "name", 20);
@@ -299,7 +299,7 @@ public class LibraryTest {
 
     // Tests for returnBook
     @Test
-    public void returnBookTest1(){
+    public void testReturnBook1(){
         // Test when no book is borrowed
         try{
             Patron testPatron =new Patron(123, "name", 20);
@@ -314,7 +314,7 @@ public class LibraryTest {
         }
     }
     @Test
-    public void returnBookTest2(){
+    public void testReturnBook2(){
         // Test when there is a book to return
         try{
             Patron testPatron =new Patron(123, "name", 20);
