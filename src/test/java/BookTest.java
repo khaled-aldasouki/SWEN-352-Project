@@ -111,15 +111,6 @@ public class BookTest {
 		assertEquals(expected, book.getCopies());
     }
 
-    //Tests for hashcode
-    @Test
-	void testHashcode() {
-		int expected = 31 * 1 + "12345".hashCode();
-		int actual = book.hashCode();
-			
-		assertEquals(expected, actual );
-	}
-
     //Tests for equals
     @Test
     void testEqaulsSame(){

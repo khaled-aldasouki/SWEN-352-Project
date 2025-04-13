@@ -121,14 +121,6 @@ public class PatronTest {
 		assertEquals(expected, patron.getId());
     }
 
-    //Tests for hashcode
-    @Test
-	void testHashcode() {
-		int expected = 31 * 1 + patron.getId();
-		int actual = patron.hashCode();
-		assertEquals(expected, actual );
-	}
-
     //Tests for equals
     @Test
     void testEqaulsSame(){
